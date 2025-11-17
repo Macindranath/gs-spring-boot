@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Home | Member Create</title>
+</head>
+
+<body>
+    <div th:replace="fragments/header">...</div>
+
+    <br>
+    <br>
+    <div class="row justify-content-center">
+        <form action="#" th:action="@{/member-create}" th:object="${member}" method="post">
+            <div th:replace="fragments/editButton :: editButton('member')">...</div>
+            <label for="name" class="col-sm-2 col-form-label">Name</label>
+            <div class="col-sm-10">
+                <input type="text" th:field="*{name}" class="form-control" id="name">
+            </div>
+            <label for="email" class="col-sm-2 col-form-label">Email</label>
+            <div class="col-sm-10">
+                <input type="text" th:field="*{email}" class="form-control" id="email">
+            </div>
+            <label for="phoneNumber" class="col-sm-2 col-form-label">Phone Number</label>
+            <div class="col-sm-10">
+                <input type="text" th:field="*{phoneNumber}" class="form-control" id="phoneNumber">
+            </div>
+            <label for="password" class="col-sm-2 col-form-label">Password</label>
+            <div class="col-sm-10">
+                <input type="password" th:field="*{password}" class="form-control" id="password">
+            </div>
+            <div th:replace="fragments/editButton :: editButton('member')">...</div>
+        </form>
+    </div>
+</body>
+
+</html>

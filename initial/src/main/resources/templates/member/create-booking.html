@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Home | Booking Create</title>
+    <script type="text/javascript">
+        function validateTimeSelection() {
+            const startTime = document.getElementById('startTime').value;
+            const endTime = document.getElementById('endTime').value;
+
+            const errorElement = document.getElementById('timeError');
+
+            if (endTime < startTime) {
+                errorElement.textContent = 'Start time must be before end time.';
+                return false;
+            }
+
+            errorElement.textContent = '';
+            return true;
+        }
+    </script>
+</head>
+
+<body>
+    <div th:replace="fragments/header">...</div>
+    <br>
+    <br>
+
+    <form action="#" th:action="@{/booking-create}" th:object="${booking}" method="post"
+        onsubmit="return validateTimeSelection()">
+        <div th:replace="fragments/editButton :: editButton('booking')">...</div>
+
+        <div class="alert alert-warning" role="alert">
+            <p>Bookings can only be done for the timeslots between 9:00 am to 9:00 pm.</p>
+        </div>
+
+        <label for="date" class="col-sm-2 col-form-label">Reservation Date</label>
+        <div class="col-sm-10">
+            <input type="date" th:field="*{date}" class="form-control" id="date" required>
+        </div>
+        <label for="startTime" class="col-sm-2 col-form-label">Start Time</label>
+        <div class="col-sm-10">
+            <input type="time" th:field="*{date}" class="form-control" id="startTime" name="startTime" min="09:00"
+                max="21:00" required>
+            <p id="timeError" style="color: red;"></p>
+        </div>
+        <label for="endTime" class="col-sm-2 col-form-label">End Time</label>
+        <div class="col-sm-10">
+            <input type="time" th:field="*{date}" class="form-control" id="endTime" name="endTime" min="09:00"
+                max="21:00" required>
+            <p th:text="${bookingError}" style="color: red;"></p>
+        </div>
+
+        <label for="courtSelect" class="col-sm-2 col-form-label">Field</label>
+        <div class="col-sm-10">
+            <select id="courtSelect" name="courtId" required>
+                <option value=""> </option>
+                <option th:each="court : ${courts}" th:value="${court.id}" th:text="${court.name}"
+                    th:selected="${null != booking.court ? booking.court.id : 0}"></option>
+            </select>
+        </div>
+
+        <label for="memberSelect" class="col-sm-2 col-form-label">Member</label>
+        <div class="col-sm-10">
+            <select id="memberSelect" name="memberId" required>
+                <option value=""> </option>
+                <option th:each="member : ${members}" th:value="${member.id}" th:text="${member.name}"
+                    th:selected="${null != booking.member ? booking.member.id : 0}"></option>
+            </select>
+        </div>
+
+        <div th:replace="fragments/editButton :: editButton('booking')">...</div>
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Home | Manager List</title>
+</head>
+
+<body>
+    <div th:replace="fragments/header">...</div>
+    <div th:replace="fragments/add :: add('booking')">...</div>
+
+    <table class="p-2 table table-striped">
+        <thead>
+            <tr>
+                <th>Actions</th>
+                <th>#</th>
+                <th>Field</th>
+                <th>Date</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Created</th>
+                <th>Last Modified</th>
+                <th>Cancelled</th>
+                <th>Member</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="booking: ${bookings}">
+                <td>
+                    <div th:replace="fragments/action :: action('booking', ${booking.id})">...</div>
+                </td>
+                <td th:text="${booking.id}"></td>
+                <div th:if="${null != booking.court}">
+                    <td>
+                        <a th:href="@{/court/{id}(id=${booking.court.id})}" th:text="${booking.court.name}"></a>
+                    </td>
+                    </a>
+                </div>
+
+                <div th:if="${null == booking.court}">
+                    <td></td>
+                </div>
+
+                <td th:text="${booking.date}"></td>
+                <td th:text="${booking.startTime}"></td>
+                <td th:text="${booking.endTime}"></td>
+
+                <td th:text="${#dates.format(booking.createdAt, 'yyyy-MM-dd HH:mm')}"></td>
+                <td th:text="${#dates.format(booking.updatedAt, 'yyyy-MM-dd HH:mm')}"></td>
+                <td th:text="${booking.cancelled}"></td>
+                <div th:if="${null != booking.member}">
+                    <td>
+                        <a th:href="@{/member/{id}(id=${booking.member.id})}" th:text="${booking.member.name}"></a>
+                    </td>
+                    </a>
+                </div>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+
+</html>

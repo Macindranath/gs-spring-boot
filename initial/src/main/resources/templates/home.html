@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Home</title>
+
+    <style>
+        th,
+        td {
+            padding: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div th:replace="fragments/header">...</div>
+    <!-- Information about Tennis CMS here using bootstrap, help documents etc.-->
+
+    <div sec:authorize="hasRole('MANAGER')">
+        Information about this service.
+    </div>
+    <div sec:authorize="hasRole('MEMBER')">
+        <br>
+        <div class="d-flex justify-content-end">
+            <a th:href="@{/booking-create}" class="btn btn-outline-secondary btn-sm">Add New Booking</a>
+        </div>
+
+        <div class="card p-2 m-2" style="width: 18rem;" th:each="myBooking: ${myBookings}">
+            <div class="card-body">
+                <a th:href="@{/court/{id}(id=${myBooking.court.id})}">
+                    <h5 class="card-title" th:text="${myBooking.court.name}"></h5>
+                </a>
+
+                <p class="card-text">
+                    <span th:text="${myBooking.date}"></span>
+                    <br>
+                    <span th:text="${myBooking.startTime}"></span>
+                    -
+                    <span th:text="${myBooking.endTime}"></span>
+                </p>
+                <a th:href="@{/booking/{id}(id=${myBooking.id})}" class="btn btn-outline-secondary btn-sm">View</a>
+            </div>
+        </div>
+
+    </div>

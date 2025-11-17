@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Home | Field Edit</title>
+</head>
+
+<body>
+    <div th:replace="fragments/header">...</div>
+
+    <br>
+    <br>
+    <div class="row justify-content-center">
+
+        <form action="#" th:action="@{/court/{id}/edit(id=${court.id})}" th:object="${court}" method="post">
+            <div th:replace="fragments/editButton :: editButton('court')">...</div>
+            <input type="hidden" th:field="*{id}" />
+            <label for="name" class="col-sm-2 col-form-label">Name</label>
+            <div class="col-sm-10">
+                <input type="text" th:field="*{name}" class="form-control" id="name">
+            </div>
+            <label for="hourlyRate" class="col-sm-2 col-form-label">Hourly Rate</label>
+            <div class="col-sm-10">
+                <input type="text" th:field="*{hourlyRate}" class="form-control" id="hourlyRate">
+            </div>
+            <div th:replace="fragments/editButton :: editButton('court')">...</div>
+        </form>
+</body>
+
+</html>

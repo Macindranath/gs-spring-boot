@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Home | Trainer Edit</title>
+</head>
+
+<body>
+    <div th:replace="fragments/header">...</div>
+
+    <br>
+    <br>
+    <div class="row justify-content-center">
+        <form action="#" th:action="@{/trainer-create}" th:object="${trainer}" method="post">
+            <div th:replace="fragments/editButton :: editButton('trainer')">...</div>
+            <label for="name" class="col-sm-2 col-form-label">Name</label>
+            <div class="col-sm-10">
+                <input type="text" th:field="*{name}" class="form-control" id="name">
+            </div>
+            <label for="email" class="col-sm-2 col-form-label">Email</label>
+            <div class="col-sm-10">
+                <input type="text" th:field="*{email}" class="form-control" id="email">
+            </div>
+            <label for="phoneNumber" class="col-sm-2 col-form-label">Phone Number</label>
+            <div class="col-sm-10">
+                <input type="text" th:field="*{phoneNumber}" class="form-control" id="phoneNumber">
+            </div>
+            <label for="description" class="col-sm-2 col-form-label">Description</label>
+            <div class="col-sm-10">
+                <textarea th:field="*{description}" class="form-control" id="description"></textarea>
+            </div>
+            <div th:replace="fragments/editButton :: editButton('trainer')">...</div>
+        </form>
+    </div>
+</body>
+
+</html>

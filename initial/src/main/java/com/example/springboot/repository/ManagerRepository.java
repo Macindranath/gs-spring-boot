@@ -4,7 +4,8 @@ import com.example.springboot.model.Manager;
 import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
-public interface ManagerRepository extends CrudRepository<Manager, Integer> {
+public interface ManagerRepository extends CrudRepository<Manager, Long> {
+
 
     /**
      * This is a custom query method. Spring Data JPA will

@@ -11,6 +11,9 @@ import jakarta.persistence.TemporalType;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
 
+/**
+ * Booking entity representing a court booking made by a member.
+ */
 @Entity
 @Table(name = "booking")
 public class Booking implements Archivable, Trackable {

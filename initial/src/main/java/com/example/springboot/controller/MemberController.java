@@ -51,7 +51,7 @@ public class MemberController {
      * Displays a list of members.
      * It can show 'active' (default) or 'archived' members based on the 'archived' URL parameter.
      */
-    
+
     @GetMapping("/member")
     public String index(Model model, @RequestParam(defaultValue = "0") int archived) {
         List<Member> result = new ArrayList<Member>();
@@ -75,6 +75,9 @@ public class MemberController {
         return "member/list";
     }
 
+    /**
+     * Displays the details page for a single member, found by their ID.
+     */
     @GetMapping("/member/{id}")
     public String show(@PathVariable Long id, Model model) {
         Member member = this.memberRepository.findById(id).orElse(null);
@@ -84,10 +87,14 @@ public class MemberController {
         return "member/view";
     }
 
+    /**
+     * Processes the form submission for updating an existing member.
+     */
     @PostMapping("/member/{id}/edit")
     public String updateItem(@PathVariable Long id, @ModelAttribute Member member) {
         member.setUpdatedAt();
 
+        // Preserves the original archivedAt date
         member.setArchivedAt(this.memberRepository.findById(id).orElse(null).getArchivedAt());
 
         this.memberRepository.save(member);
@@ -95,6 +102,9 @@ public class MemberController {
         return "redirect:/member/" + id;
     }
 
+    /**
+     * Displays the form to edit an existing member's details.
+     */
     @GetMapping("/member/{id}/edit")
     public String showEditForm(@PathVariable Long id, Model model) {
         Member member = this.memberRepository.findById(id).orElse(null);
@@ -104,6 +114,9 @@ public class MemberController {
         return "member/edit";
     }
 
+    /**
+     * Displays the form to create a new member.
+     */
     @GetMapping("/member-create")
     public String showForm(Model model, @AuthenticationPrincipal UserDetails userDetails) {
         model.addAttribute("member", new Member());
@@ -111,6 +124,10 @@ public class MemberController {
         return "member/create";
     }
 
+    /**
+     * Processes the form submission for creating a new member.
+     * This method also encodes the password and assigns the 'ROLE_MEMBER'.
+     */
     @PostMapping("/member-create")
     public String submitForm(Model model, @ModelAttribute Member member) {
         member.setPassword(this.passwordEncoder.encode(member.getPassword()));
@@ -124,6 +141,9 @@ public class MemberController {
         return "redirect:/member";
     }
 
+    /**
+     * Archives a member by setting their archivedAt date to the current date.
+     */
     @GetMapping("/member/{id}/archive")
     public String archiveItem(@PathVariable Long id) {
         Member member = this.memberRepository.findById(id).orElse(null);
@@ -136,6 +156,9 @@ public class MemberController {
         return "redirect:/member";
     }
 
+    /**
+     * Unarchives a member by setting their archivedAt date to null.
+     */
     @GetMapping("/member/{id}/unarchive")
     public String unarchiveItem(@PathVariable Long id) {
         Member member = this.memberRepository.findById(id).orElse(null);

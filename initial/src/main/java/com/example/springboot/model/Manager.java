@@ -3,9 +3,8 @@ package com.example.springboot.model;
 import java.util.Date;
 import jakarta.persistence.Table;
 import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 
+// Manager entity representing a system manager.
 @Entity
 @Table(name = "manager")
 public class Manager extends User {

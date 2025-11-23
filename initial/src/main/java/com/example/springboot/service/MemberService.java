@@ -2,45 +2,36 @@ package com.example.springboot.service;
 
 import com.example.springboot.repository.MemberRepository;
 import java.util.List;
-import java.util.ArrayList;
 import com.example.springboot.model.Member;
 import org.springframework.stereotype.Service;
 
+// MemberService class for managing Member entities.
 @Service
 public class MemberService {
 
+    
     private MemberRepository memberRepository;
 
-    // Dependency Injection
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
 
+    /**
+     * Gets all archived members.
+     * This now calls the repository method.
+     * The database does all the work.
+     */
     public List<Member> getArchivedMembers() {
-        List<Member> archivedMembers = new ArrayList<Member>();
 
-        Iterable<Member> members = this.memberRepository.findAll();
-
-        for (Member member : members) {
-            if (null != member.getArchivedAt()) {
-                archivedMembers.add(member);
-            }
-        }
-
-        return archivedMembers;
+        return this.memberRepository.findByArchivedAtIsNotNull();
     }
 
+    /**
+     * Gets all active (non-archived) members.
+     * This also calls the repository method.
+     */
     public List<Member> getActiveMembers() {
-        List<Member> activeMembers = new ArrayList<Member>();
 
-        Iterable<Member> members = this.memberRepository.findAll();
-
-        for (Member member : members) {
-            if (null == member.getArchivedAt()) {
-                activeMembers.add(member);
-            }
-        }
-
-        return activeMembers;
+        return this.memberRepository.findByArchivedAtIsNull();
     }
 }

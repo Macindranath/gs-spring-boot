@@ -5,6 +5,7 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 
+// Trainer entity representing a system trainer.
 @Entity
 @Table(name = "trainer")
 public class Trainer extends User {
@@ -12,6 +13,7 @@ public class Trainer extends User {
     @Column(columnDefinition = "TEXT")
     protected String description;
 
+    // Constructor initializing creation and update timestamps.
     public Trainer() {
         super();
 

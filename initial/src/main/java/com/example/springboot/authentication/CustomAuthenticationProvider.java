@@ -12,16 +12,26 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
+/**
+ * Custom authentication provider that handles user authentication.
+ * It checks for a hardcoded administrator user and delegates other authentication
+ * requests to the CustomUserDetailsService.
+ */
 @Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 
+    // Dependency Injection for the password encoder and user details service
+    //Lazy to avoid circular dependencies
+    //autowired to let Spring inject the dependencies
     @Lazy
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Lazy
     @Autowired
     private CustomUserDetailsService userDetailsService;
 
+    //override the authenticate method to provide custom authentication logic
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String username = authentication.getName();
@@ -30,7 +40,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         if ("administrator".equals(username) && "passwordpassword".equals(password)) {
             System.out.println("Authenticated");
             return new UsernamePasswordAuthenticationToken(
-                    User.withDefaultPasswordEncoder().username(username).password(password).roles("ADMINISTRATOR")
+                    User.builder().username(username).password(password).roles("ADMINISTRATOR")
                             .build(),
                     password);
         }

@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import org.springframework.security.core.GrantedAuthority;
 import jakarta.persistence.Id;
 
+// Operation entity representing a system operation.
 @Entity
 class Operation implements GrantedAuthority {
     @Id

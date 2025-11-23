@@ -4,6 +4,7 @@ import java.util.Date;
 import jakarta.persistence.Table;
 import jakarta.persistence.Entity;
 
+// Member entity representing a system member.
 @Entity
 @Table(name = "member")
 public class Member extends User {

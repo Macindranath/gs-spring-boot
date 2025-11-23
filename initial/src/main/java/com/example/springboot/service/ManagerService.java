@@ -2,45 +2,36 @@ package com.example.springboot.service;
 
 import com.example.springboot.repository.ManagerRepository;
 import java.util.List;
-import java.util.ArrayList;
 import com.example.springboot.model.Manager;
 import org.springframework.stereotype.Service;
 
+
+// ManagerService class for managing Manager entities.
 @Service
 public class ManagerService {
 
     private ManagerRepository managerRepository;
 
-    // Dependency Injection
     public ManagerService(ManagerRepository managerRepository) {
         this.managerRepository = managerRepository;
     }
 
+    /**
+     * Gets all archived managers.
+     * This now calls the repository method.
+     * The database does all the work.
+     */
     public List<Manager> getArchivedManagers() {
-        List<Manager> archivedManagers = new ArrayList<Manager>();
 
-        Iterable<Manager> managers = this.managerRepository.findAll();
-
-        for (Manager manager : managers) {
-            if (null != manager.getArchivedAt()) {
-                archivedManagers.add(manager);
-            }
-        }
-
-        return archivedManagers;
+        return this.managerRepository.findByArchivedAtIsNotNull();
     }
 
+    /**
+     * Gets all active (non-archived) managers.
+     * This also calls the repository method.
+     */
     public List<Manager> getActiveManagers() {
-        List<Manager> activeManagers = new ArrayList<Manager>();
 
-        Iterable<Manager> managers = this.managerRepository.findAll();
-
-        for (Manager manager : managers) {
-            if (null == manager.getArchivedAt()) {
-                activeManagers.add(manager);
-            }
-        }
-
-        return activeManagers;
+        return this.managerRepository.findByArchivedAtIsNull();
     }
 }

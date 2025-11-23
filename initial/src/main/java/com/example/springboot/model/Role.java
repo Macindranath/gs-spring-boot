@@ -7,8 +7,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import com.example.springboot.model.RoleName;
 
+// Role entity representing a user role in the system.
 @Entity
 @Table(name = "role")
 public class Role {

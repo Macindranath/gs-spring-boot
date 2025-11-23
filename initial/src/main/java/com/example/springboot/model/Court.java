@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
+// Booking entity representing a court booking made by a member.
 @Entity
 @Table(name = "court")
 public class Court implements Archivable, Trackable {

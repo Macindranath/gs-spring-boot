@@ -1,10 +1,8 @@
 package com.example.springboot.model;
 
 import java.util.Date;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
-import jakarta.persistence.MappedSuperclass;
 
+// Interface for trackable entities
 public interface Trackable {
 
     public Date getCreatedAt();

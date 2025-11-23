@@ -16,6 +16,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+// CustomUserDetailsService class for loading user-specific data.
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 

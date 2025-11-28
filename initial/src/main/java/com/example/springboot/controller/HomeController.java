@@ -30,7 +30,7 @@ public class HomeController {
 
 	@GetMapping("/")
 	public String index(Model model, @AuthenticationPrincipal UserDetails userDetails) {
-		return "home";
+		return "redirect:/home";
 	}
 
 	@GetMapping("/home")

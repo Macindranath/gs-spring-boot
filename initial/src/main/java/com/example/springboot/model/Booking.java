@@ -26,6 +26,7 @@ public class Booking implements Archivable, Trackable {
         this.setUpdatedAt();
     }
 
+    // Getters and setters for the Booking entity fields
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;

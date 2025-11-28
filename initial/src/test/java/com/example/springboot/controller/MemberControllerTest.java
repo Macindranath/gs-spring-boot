@@ -45,7 +45,7 @@ public class MemberControllerTest {
     }
 
     @Test
-    // FIX: We must simulate a user so 'userDetails' is not null in the controller
+    // FIX: Simulates a user so 'userDetails' is not null in the controller
     @WithMockUser(username = "manager", roles = {"MANAGER"}) 
     public void testShowCreateForm() throws Exception {
         mockMvc.perform(get("/member-create"))
@@ -80,7 +80,7 @@ public class MemberControllerTest {
     @Test
     public void testUpdateMember() throws Exception {
         // ARRANGE
-        // Critical: We must find a member so .getArchivedAt() doesn't crash
+        // Critical: Need to find a member so .getArchivedAt() doesn't crash
         Member existing = new Member();
         existing.setId(1L);
         when(memberRepository.findById(1L)).thenReturn(Optional.of(existing));

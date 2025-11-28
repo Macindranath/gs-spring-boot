@@ -46,7 +46,7 @@ public class CustomUserDetailsServiceTest {
         manager.setRole(role);
 
         // IMPORTANT: The implementation uses findAll() and loops.
-        // We must mock findAll returning a list containing our manager.
+        // Must mock findAll returning a list containing the manager.
         when(managerRepository.findAll()).thenReturn(Arrays.asList(manager));
 
         // ACT

@@ -28,6 +28,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         this.memberRepository = memberRepository;
     }
 
+    // Override the loadUserByUsername method to load user details by username
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Iterable<Manager> managers = this.managerRepository.findAll();
@@ -42,8 +43,9 @@ public class CustomUserDetailsService implements UserDetailsService {
             }
         }
 
+        // Iterate through members to find a matching username
         Iterable<Member> members = this.memberRepository.findAll();
-
+        
         for (Member member : members) {
             if (username.equals(member.getEmail())) {
                 List<GrantedAuthority> authorities = member.getRoles().stream()

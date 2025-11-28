@@ -7,8 +7,10 @@ import com.example.springboot.model.User;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+// Tests for the Abstract Factory implementation.
 public class FactoryTest {
 
+    // Tests the ManagerFactory produces a Manager instance
     @Test
     public void testManagerFactory() {
         UserFactory factory = new ManagerFactory();
@@ -18,6 +20,7 @@ public class FactoryTest {
         assertTrue(user instanceof Manager);
     }
 
+    // Tests the MemberFactory produces a Member instance
     @Test
     public void testMemberFactory() {
         UserFactory factory = new MemberFactory();
@@ -27,6 +30,7 @@ public class FactoryTest {
         assertTrue(user instanceof Member);
     }
 
+    // Tests the TrainerFactory produces a Trainer instance
     @Test
     public void testTrainerFactory() {
         UserFactory factory = new TrainerFactory();

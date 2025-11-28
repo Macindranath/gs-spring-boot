@@ -21,7 +21,7 @@ public class CompleteFactoryTest {
         assertNotNull(manager);
         assertTrue(manager instanceof Manager, "Factory should return a Manager instance");
 
-        // 2. Test MemberFactory (Add this class to your project if missing)
+        // 2. Test MemberFactory 
         UserFactory memberFactory = new MemberFactory();
         User member = memberFactory.getInstance();
         assertNotNull(member);

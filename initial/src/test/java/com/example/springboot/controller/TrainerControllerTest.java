@@ -116,7 +116,7 @@ public class TrainerControllerTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/trainer"));
 
-        // Verify we saved the change
+        // Verifies the change is saved
         verify(trainerRepository).save(any(Trainer.class));
     }
 

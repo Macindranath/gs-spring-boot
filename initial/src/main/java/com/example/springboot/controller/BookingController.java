@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+// Controller to handle booking-related endpoints
 @Controller
 public class BookingController {
 
@@ -37,6 +38,7 @@ public class BookingController {
         this.memberRepository = memberRepository;
     }
 
+    // Display a list of bookings, filtered by archived status
     @GetMapping("/booking")
     public String index(Model model, @RequestParam(defaultValue = "0") int archived) {
         List<Booking> result = new ArrayList<Booking>();
@@ -60,6 +62,7 @@ public class BookingController {
         return "booking/list";
     }
 
+    // Display details of a specific booking by ID
     @GetMapping("/booking/{id}")
     public String show(@PathVariable Long id, Model model) {
         Booking booking = this.bookingRepository.findById(id).orElse(null);
@@ -69,6 +72,7 @@ public class BookingController {
         return "booking/view";
     }
 
+    // Display the booking creation form
     @GetMapping("/booking-create")
     public String showForm(Model model, @AuthenticationPrincipal UserDetails userDetails) {
         Booking booking = new Booking();
@@ -78,6 +82,7 @@ public class BookingController {
         model.addAttribute("bookingError", "");
         model.addAttribute("booking", booking);
 
+        // Prepare the list of courts for the booking form
         Iterable<Court> courts = this.courtRepository.findAll();
         List<Court> selectedCourts = new ArrayList<Court>();
         for (Court court : courts) {
@@ -87,6 +92,7 @@ public class BookingController {
         }
         model.addAttribute("courts", selectedCourts);
 
+        // Prepare the list of members for the booking form
         Iterable<Member> members = this.memberRepository.findAll();
         List<Member> selectedMembers = new ArrayList<Member>();
 
@@ -106,6 +112,7 @@ public class BookingController {
         return "booking/create";
     }
 
+    // Handle the submission of the booking creation form
     @PostMapping("/booking-create")
     public String submitForm(
             Model model,
@@ -116,12 +123,14 @@ public class BookingController {
         booking.setCourt(this.courtRepository.findById(courtId).orElse(null));
         Optional<Member> currentMember = this.memberRepository.findByEmail(userDetails.getUsername());
 
+        // Set the member for the booking, prioritizing the current authenticated member
         try {
             booking.setMember(this.memberRepository.findById(currentMember.get().getId()).orElse(null));
         } catch (NoSuchElementException e) {
             booking.setMember(this.memberRepository.findById(memberId).orElse(null));
         }
 
+        // Retrieve all bookings and filter by court ID
         Iterable<Booking> allBookings = this.bookingRepository.findAll();
         List<Booking> currentBookings = new ArrayList<Booking>();
         for (Booking existingBooking : allBookings) {
@@ -130,6 +139,7 @@ public class BookingController {
             }
         }
 
+        // Check for booking conflicts with existing bookings
         for (Booking existingBooking : currentBookings) {
             if (existingBooking.getDate().compareTo(booking.getDate()) == 0
                     && (existingBooking.getStartTime().compareTo(booking.getStartTime()) >= 0
@@ -147,6 +157,7 @@ public class BookingController {
                 }
                 model.addAttribute("courts", selectedCourts);
 
+                // Prepare the list of members for the booking form
                 Iterable<Member> members = this.memberRepository.findAll();
                 List<Member> selectedMembers = new ArrayList<Member>();
                 for (Member member : members) {
@@ -168,6 +179,7 @@ public class BookingController {
         return "redirect:/booking";
     }
 
+    // Handle the cancellation of a booking
     @GetMapping("/booking/{id}/cancel")
     public String cancelItem(@PathVariable Long id) {
         Booking booking = this.bookingRepository.findById(id).orElse(null);

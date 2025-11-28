@@ -115,7 +115,7 @@ public class HomeControllerTest {
 
         // ACT
         // Now the controller enters the loop -> checks the booking -> calls currentMember.get()
-        // -> BOOM (NoSuchElementException) -> Catch Block -> returns "home" without adding model attribute.
+        // ->  NoSuchElementException -> Catch Block -> returns "home" without adding model attribute.
         mockMvc.perform(get("/home"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("home"))

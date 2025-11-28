@@ -22,8 +22,7 @@ public class CompleteModelTest {
         // If 'id' is private and has no setter, this test focuses on object creation
         assertNotNull(op);
         
-        // If Operation implements GrantedAuthority, we test getAuthority
-        // Note: Adjust according to specific Operation implementation
+        // If Operation implements GrantedAuthority, it tests getAuthority
         assertNull(op.getAuthority()); 
     }
 

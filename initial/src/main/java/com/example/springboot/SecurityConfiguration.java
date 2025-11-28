@@ -10,10 +10,12 @@ import com.example.springboot.authentication.CustomAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
+// Security configuration class for Spring Security
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
 
+        // Custom authentication provider for handling authentication
         @Autowired
         private CustomAuthenticationProvider customAuthenticationProvider;
 

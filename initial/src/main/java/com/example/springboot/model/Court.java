@@ -22,6 +22,7 @@ public class Court implements Archivable, Trackable {
         this.setUpdatedAt();
     }
 
+    // Getters and setters for the Court entity fields
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;

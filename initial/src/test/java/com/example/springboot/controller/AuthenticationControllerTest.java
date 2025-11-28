@@ -20,7 +20,7 @@ public class AuthenticationControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    // We simulate a user named "testUser" with the role "ADMIN"
+    // Simulates a user named "testUser" with the role "ADMIN"
     @WithMockUser(username = "testUser", authorities = {"ROLE_ADMIN"})
     public void testGetUserInfo() throws Exception {
         

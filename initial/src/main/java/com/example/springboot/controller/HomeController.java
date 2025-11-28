@@ -15,6 +15,7 @@ import com.example.springboot.model.Member;
 import com.example.springboot.repository.BookingRepository;
 import com.example.springboot.repository.MemberRepository;
 
+// Home controller to handle the home page and user-specific data
 @Controller
 public class HomeController {
 
@@ -28,15 +29,18 @@ public class HomeController {
 		this.bookingRepository = bookingRepository;
 	}
 
+	// Redirect root URL to the home page
 	@GetMapping("/")
 	public String index(Model model, @AuthenticationPrincipal UserDetails userDetails) {
 		return "redirect:/home";
 	}
 
+	// Display the home page with user-specific bookings
 	@GetMapping("/home")
 	public String home(Model model, @AuthenticationPrincipal UserDetails userDetails) {
 		Optional<Member> currentMember = this.memberRepository.findByEmail(userDetails.getUsername());
 
+		// Retrieve and filter bookings for the current member
 		try {
 			Iterable<Booking> allBookings = this.bookingRepository.findAll();
 			List<Booking> myBookings = new ArrayList<Booking>();

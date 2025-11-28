@@ -119,7 +119,7 @@ public class CourtControllerTest {
     @Test
     public void testUpdateCourt() throws Exception {
         // ARRANGE
-        // We MUST mock findById because your controller calls it 
+        // MUST mock findById because the controller calls it 
         // to preserve the archivedAt date.
         Court existing = new Court();
         existing.setId(1L);

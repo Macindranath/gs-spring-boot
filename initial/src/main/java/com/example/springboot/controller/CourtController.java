@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+
+// Controller to handle court-related endpoints
 @Controller
 public class CourtController {
 
@@ -23,6 +25,7 @@ public class CourtController {
         this.courtRepository = courtRepository;
     }
 
+    // Display a list of courts, filtered by archived status
     @GetMapping("/court")
     public String index(Model model, @RequestParam(defaultValue = "0") int archived) {
         List<Court> result = new ArrayList<Court>();
@@ -46,6 +49,7 @@ public class CourtController {
         return "court/list";
     }
 
+    // Display details of a specific court by ID
     @GetMapping("/court/{id}")
     public String show(@PathVariable Long id, Model model) {
         Court court = this.courtRepository.findById(id).orElse(null);
@@ -55,6 +59,7 @@ public class CourtController {
         return "court/view";
     }
 
+    // Handle the submission of the court edit form
     @PostMapping("/court/{id}/edit")
     public String updateItem(@PathVariable Long id, @ModelAttribute Court court) {
         court.setUpdatedAt();
@@ -66,6 +71,7 @@ public class CourtController {
         return "redirect:/court/" + id;
     }
 
+    // Display the court edit form
     @GetMapping("/court/{id}/edit")
     public String showEditForm(@PathVariable Long id, Model model) {
         Court court = this.courtRepository.findById(id).orElse(null);
@@ -75,6 +81,7 @@ public class CourtController {
         return "court/edit";
     }
 
+    // Display the court creation form
     @GetMapping("/court-create")
     public String showForm(Model model) {
         model.addAttribute("court", new Court());
@@ -82,6 +89,7 @@ public class CourtController {
         return "court/create";
     }
 
+    // Handle the submission of the court creation form
     @PostMapping("/court-create")
     public String submitForm(Model model, @ModelAttribute Court court) {
         this.courtRepository.save(court);
@@ -89,6 +97,7 @@ public class CourtController {
         return "redirect:/court";
     }
 
+    // Handle the archiving of a court
     @GetMapping("/court/{id}/archive")
     public String archiveItem(@PathVariable Long id) {
         Court court = this.courtRepository.findById(id).orElse(null);
@@ -101,6 +110,7 @@ public class CourtController {
         return "redirect:/court";
     }
 
+    // Handle the unarchiving of a court
     @GetMapping("/court/{id}/unarchive")
     public String unarchiveItem(@PathVariable Long id) {
         Court court = this.courtRepository.findById(id).orElse(null);

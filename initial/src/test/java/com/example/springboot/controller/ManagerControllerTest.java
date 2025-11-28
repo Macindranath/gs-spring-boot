@@ -114,7 +114,7 @@ public class ManagerControllerTest {
 
     @Test
     public void testUpdateManager() throws Exception {
-        // We mock findById because the controller calls .getArchivedAt() on the result
+        // Mock findById because the controller calls .getArchivedAt() on the result
         Manager existing = new Manager();
         existing.setId(1L);
         when(managerRepository.findById(1L)).thenReturn(Optional.of(existing));

@@ -53,7 +53,8 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
         return new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
     }
-
+    
+    //override the supports method to specify the type of authentication supported
     @Override
     public boolean supports(Class<?> authentication) {
         return UsernamePasswordAuthenticationToken.class.isAssignableFrom(authentication);

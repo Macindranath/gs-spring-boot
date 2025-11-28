@@ -4,12 +4,11 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.Date;
 
-/**
- * Questo test serve ad aumentare il Code Coverage verificando
- * che i POJO (Plain Old Java Objects) funzionino correttamente.
- */
+// This test increases Code Coverage by verifying
+// that the POJOs (Plain Old Java Objects) work correctly.
 public class ModelTest {
 
+    // Tests the Manager entity's getters and setters
     @Test
     public void testManagerEntity() {
         Manager m = new Manager();
@@ -24,6 +23,7 @@ public class ModelTest {
         assertNotNull(m.getCreatedAt()); // Verifico che il costruttore metta la data
     }
 
+    // Tests the Booking entity's getters and setters
     @Test
     public void testBookingEntity() {
         Booking b = new Booking();
@@ -34,9 +34,10 @@ public class ModelTest {
 
         assertEquals(100L, b.getId());
         assertEquals("2025-05-20", b.getDate());
-        assertEquals("Yes", b.getCancelled()); // Testo la logica del booleano
+        assertEquals("Yes", b.getCancelled()); // Tests the boolean logic
     }
 
+    // Tests the Court entity's getters and setters
     @Test
     public void testCourtEntity() {
         Court c = new Court();

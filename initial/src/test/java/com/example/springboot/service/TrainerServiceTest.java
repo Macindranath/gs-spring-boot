@@ -16,9 +16,12 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+
+// Tests for the TrainerService class
 @ExtendWith(MockitoExtension.class)
 public class TrainerServiceTest {
 
+    // Tests the TrainerService class
     @Mock
     private TrainerRepository trainerRepository;
 
@@ -38,6 +41,7 @@ public class TrainerServiceTest {
         verify(trainerRepository, times(1)).findByArchivedAtIsNull();
     }
 
+    // Tests the getArchivedTrainers method
     @Test
     public void testGetArchivedTrainers() {
         Trainer t = new Trainer();

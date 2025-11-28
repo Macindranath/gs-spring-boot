@@ -16,15 +16,18 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+// Tests for the MemberService class
 @ExtendWith(MockitoExtension.class)
 public class MemberServiceTest {
 
+    // Tests the MemberService class
     @Mock
     private MemberRepository memberRepository;
 
     @InjectMocks
     private MemberService memberService;
 
+    // Tests the getActiveMembers method
     @Test
     public void testGetActiveMembers() {
         Member m = new Member();
@@ -38,6 +41,7 @@ public class MemberServiceTest {
         verify(memberRepository, times(1)).findByArchivedAtIsNull();
     }
 
+    // Tests the getArchivedMembers method
     @Test
     public void testGetArchivedMembers() {
         Member m = new Member();

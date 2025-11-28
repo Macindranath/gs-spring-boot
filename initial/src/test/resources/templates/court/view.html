@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Home | Field View</title>
+</head>
+
+<body>
+    <div th:replace="fragments/header">...</div>
+
+    <br>
+    <br>
+    <div class="row justify-content-center">
+        <div th:replace="fragments/viewButton :: viewButton('court', ${court.id})">...</div>
+
+        <form>
+            <div class="form-group row">
+                <label for="name" class="col-sm-2 col-form-label">Name</label>
+                <div class="col-sm-10">
+                    <input type="text" readonly class="form-control-plaintext" id="name" th:value="${court.name}">
+                </div>
+                <label for="hourlyRate" class="col-sm-2 col-form-label">Hourly Rate</label>
+                <div class="col-sm-10">
+                    <input type="text" readonly class="form-control-plaintext" id="hourlyRate"
+                        th:value="${court.hourlyRate}">
+                </div>
+                <label for="createdAt" class="col-sm-2 col-form-label">Created At</label>
+                <div class="col-sm-10">
+                    <input type="text" readonly class="form-control-plaintext" id="createdAt"
+                        th:value="${court.createdAt}">
+                </div>
+                <label for="updatedAt" class="col-sm-2 col-form-label">Updated At</label>
+                <div class="col-sm-10">
+                    <input type="text" readonly class="form-control-plaintext" id="updatedAt"
+                        th:value="${court.updatedAt}">
+                </div>
+            </div>
+        </form>
+
+        <div th:replace="fragments/viewButton :: viewButton('court', ${court.id})">...</div>
+</body>
+
+</html>

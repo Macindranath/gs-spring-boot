@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Home | Field View</title>
+</head>
+
+<body>
+    <div th:replace="fragments/header">...</div>
+
+    <br>
+    <br>
+    <div class="row justify-content-center">
+        <div th:replace="fragments/viewButton :: viewButton('booking', ${booking.id})">...</div>
+
+        <form>
+            <div class="form-group row">
+                <label for="name" class="col-sm-2 col-form-label">Reference #</label>
+                <div class="col-sm-10">
+                    <input type="text" readonly class="form-control-plaintext" id="id" th:value="${booking.id}">
+                </div>
+                <label for="courtName" class="col-sm-2 col-form-label">Field</label>
+                <div class="col-sm-10">
+                    <input type="text" readonly class="form-control-plaintext" id="courtName"
+                        th:value="${booking.court.name}">
+                </div>
+                <label for="date" class="col-sm-2 col-form-label">Date</label>
+                <div class="col-sm-10">
+                    <input type="text" readonly class="form-control-plaintext" id="date" th:value="${booking.date}">
+                </div>
+                <label for="startTime" class="col-sm-2 col-form-label">Start Time</label>
+                <div class="col-sm-10">
+                    <input type="text" readonly class="form-control-plaintext" id="startTime"
+                        th:value="${booking.startTime}">
+                </div>
+                <label for="endTime" class="col-sm-2 col-form-label">End Time</label>
+                <div class="col-sm-10">
+                    <input type="text" readonly class="form-control-plaintext" id="endTime"
+                        th:value="${booking.endTime}">
+                </div>
+                <label for="createdAt" class="col-sm-2 col-form-label">Created At</label>
+                <div class="col-sm-10">
+                    <input type="text" readonly class="form-control-plaintext" id="createdAt"
+                        th:value="${booking.createdAt}">
+                </div>
+                <label for="updatedAt" class="col-sm-2 col-form-label">Updated At</label>
+                <div class="col-sm-10">
+                    <input type="text" readonly class="form-control-plaintext" id="updatedAt"
+                        th:value="${booking.updatedAt}">
+                </div>
+            </div>
+        </form>
+
+        <div th:replace="fragments/viewButton :: viewButton('booking', ${booking.id})">...</div>
+</body>
+
+</html>

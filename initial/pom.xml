@@ -65,8 +65,19 @@
             <artifactId>spring-boot-devtools</artifactId>
             <optional>true</optional>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <scope>test</scope>
+         </dependency>
+
     </dependencies>
 
+    <!-- Spring Security test support mv
+    
+
+-->
     <build>
         <plugins>
             <plugin>

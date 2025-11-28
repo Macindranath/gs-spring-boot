@@ -1,0 +1,15 @@
+<div th:fragment="add(class)" class="container">
+    <br>
+    <div class="d-flex justify-content-end">
+        <a sec:authorize="hasRole('MANAGER')" th:href="@{/{class}-create(class=${class})}"
+            class="btn btn-outline-secondary btn-sm">Add New
+            <span th:text="${#strings.capitalize(class)}"></span></a>
+    </div>
+    <br>
+    <div sec:authorize="hasRole('MANAGER')" class="d-flex justify-content-end">
+        <a th:href="@{/{class}?archived=0(class=${class})}">Active</a>
+        &nbsp;|&nbsp;
+        <a th:href="@{/{class}?archived=1(class=${class})}">Archived</a>
+    </div>
+    <br>
+</div>

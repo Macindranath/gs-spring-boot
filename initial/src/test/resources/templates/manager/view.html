@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Home | Manager View</title>
+</head>
+
+<body>
+    <div th:replace="fragments/header">...</div>
+
+    <br>
+    <br>
+    <div class="row justify-content-center">
+        <div th:replace="fragments/viewButton :: viewButton('manager', ${manager.id})">...</div>
+
+        <form>
+            <div class="form-group row">
+                <label for="name" class="col-sm-2 col-form-label">Name</label>
+                <div class="col-sm-10">
+                    <input type="text" readonly class="form-control-plaintext" id="name" th:value="${manager.name}">
+                </div>
+                <label for="email" class="col-sm-2 col-form-label">Email</label>
+                <div class="col-sm-10">
+                    <input type="text" readonly class="form-control-plaintext" id="email" th:value="${manager.email}">
+                </div>
+                <label for="phoneNumber" class="col-sm-2 col-form-label">Phone Number</label>
+                <div class="col-sm-10">
+                    <input type="text" readonly class="form-control-plaintext" id="phoneNumber"
+                        th:value="${manager.phoneNumber}">
+                </div>
+                <label for="createdAt" class="col-sm-2 col-form-label">Created At</label>
+                <div class="col-sm-10">
+                    <input type="text" readonly class="form-control-plaintext" id="createdAt"
+                        th:value="${manager.createdAt}">
+                </div>
+                <label for="updatedAt" class="col-sm-2 col-form-label">Updated At</label>
+                <div class="col-sm-10">
+                    <input type="text" readonly class="form-control-plaintext" id="updatedAt"
+                        th:value="${manager.updatedAt}">
+                </div>
+            </div>
+        </form>
+
+        <div th:replace="fragments/viewButton :: viewButton('manager', ${manager.id})">...</div>
+</body>
+
+</html>

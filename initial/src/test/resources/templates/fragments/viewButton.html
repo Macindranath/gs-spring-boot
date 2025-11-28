@@ -1,0 +1,21 @@
+<div th:fragment="viewButton(class, id)" class="container">
+    <br>
+    <div th:switch="${class}">
+        <span th:case="'booking'">
+            <span sec:authorize="hasRole('MEMBER')">
+                <a class="btn btn-outline-secondary" href="/home">Back</a>
+            </span>
+            <span sec:authorize="hasRole('MANAGER')">
+                <a class="btn btn-outline-secondary" th:href="@{/{class}(class=${class})}">Back</a>
+            </span>
+        </span>
+        <span sec:authorize="hasRole('MANAGER')" th:case="*">
+            <a class="btn btn-outline-secondary" th:href="@{/{class}(class=${class})}">Back</a>
+            <!-- Edit -->
+            <a class="btn btn-outline-secondary" th:href="@{/{class}/{id}/edit(id=${id},class=${class})}">Edit</a>
+        </span>
+    </div>
+
+    <br>
+    <br>
+</div>

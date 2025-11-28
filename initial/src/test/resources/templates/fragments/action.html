@@ -1,0 +1,29 @@
+<div th:fragment="action(class, id)" class="container">
+    <!-- Actions -->
+    <!-- View -->
+    <a th:href="@{/{class}/{id}(id=${id},class=${class})}">View</a>
+    &nbsp;
+    <div th:switch="${class}">
+        <span sec:authorize="hasRole('MANAGER')" th:case="'booking'">
+            <!-- Cancel -->
+            <a th:href="@{/booking/{id}/cancel(id=${booking.id})}">Cancel</a>
+        </span>
+        <span sec:authorize="hasRole('MANAGER')" th:case="*">
+            <!-- Edit -->
+            <a th:href="@{/{class}/{id}/edit(id=${id},class=${class})}">Edit</a>
+        </span>
+    </div>
+    &nbsp;
+    <!-- Archive or Restore-->
+    <span sec:authorize="hasRole('MANAGER')" th:if="${null != param.archived && param.archived[0] == '1'}">
+        <a th:href="@{/{class}/{id}/unarchive(id=${id},class=${class})}">
+            Restore
+        </a>
+    </span>
+    <span sec:authorize="hasRole('MANAGER')"
+        th:if="${null == param.archived || (null != param.archived && param.archived[0] == '0')}">
+        <a th:href="@{/{class}/{id}/archive(id=${id},class=${class})}">
+            Archive
+        </a>
+    </span>
+</div>

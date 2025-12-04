@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 
+// MemberRepository interface for managing Member entities. Long is for member id
 public interface MemberRepository extends CrudRepository<Member, Long> {
 
     Optional<Member> findByEmail(String email);

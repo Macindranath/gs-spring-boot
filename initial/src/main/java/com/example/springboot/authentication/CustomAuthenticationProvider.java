@@ -14,7 +14,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 
 /**
  * Custom authentication provider that handles user authentication.
- * It checks for a hardcoded administrator user and delegates other authentication
+ * It checks for an administrator user and delegates other authentication
  * requests to the CustomUserDetailsService.
  */
 @Component

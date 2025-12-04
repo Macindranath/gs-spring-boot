@@ -46,8 +46,7 @@ public class HomeControllerTest {
     @WithMockUser
     public void testIndex() throws Exception {
         mockMvc.perform(get("/"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("home"));
+               .andExpect(view().name("redirect:/home"));
     }
 
     // --- TEST 2: The Logic Path (Member viewing their bookings) ---

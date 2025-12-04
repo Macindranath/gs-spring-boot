@@ -4,6 +4,7 @@ import com.example.springboot.model.Manager;
 import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
+// ManagerRepository interface for managing Manager entities. Long is for manager id
 public interface ManagerRepository extends CrudRepository<Manager, Long> {
 
 

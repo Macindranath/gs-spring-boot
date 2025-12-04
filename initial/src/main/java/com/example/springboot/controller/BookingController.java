@@ -176,6 +176,15 @@ public class BookingController {
 
         this.bookingRepository.save(booking);
 
+       // After successful booking, redirect based on user role
+        try {
+            if (null != this.memberRepository.findById(currentMember.get().getId()).orElse(null)) {
+                return "redirect:/home";
+            }
+        } catch (NoSuchElementException e) {
+            //
+        }
+
         return "redirect:/booking";
     }
 

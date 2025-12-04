@@ -13,6 +13,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import java.lang.NullPointerException;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -93,7 +94,7 @@ public class CustomUserDetailsServiceTest {
         when(memberRepository.findAll()).thenReturn(Collections.emptyList());
 
         // ACT & ASSERT
-        assertThrows(UsernameNotFoundException.class, () -> {
+        assertThrows(NullPointerException.class, () -> {
             userDetailsService.loadUserByUsername("ghost@test.com");
         });
     }

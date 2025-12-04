@@ -11,6 +11,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import com.example.springboot.repository.ManagerRepository;
 import com.example.springboot.repository.MemberRepository;
+import com.example.springboot.repository.TrainerRepository;
+import com.example.springboot.model.Trainer;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -20,12 +22,15 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
+    // Repositories for accessing user data
     private ManagerRepository managerRepository;
     private MemberRepository memberRepository;
+    private TrainerRepository trainerRepository;
 
-    public CustomUserDetailsService(ManagerRepository managerRepository, MemberRepository memberRepository) {
+    public CustomUserDetailsService(ManagerRepository managerRepository, MemberRepository memberRepository, TrainerRepository trainerRepository) {
         this.managerRepository = managerRepository;
         this.memberRepository = memberRepository;
+        this.trainerRepository = trainerRepository;
     }
 
     // Override the loadUserByUsername method to load user details by username
@@ -56,6 +61,21 @@ public class CustomUserDetailsService implements UserDetailsService {
             }
         }
 
+        // Iterate through members to find a matching username
+        Iterable<Trainer> trainers = this.trainerRepository.findAll();
+
+        // If trainers is not null, iterate through trainers to find a matching username
+        if (null != trainers) {
+         for (Trainer trainer : trainers) {
+            if (username.equals(trainer.getEmail())) {
+                List<GrantedAuthority> authorities = trainer.getRoles().stream()
+                        .map(role -> new SimpleGrantedAuthority(role.getName().name()))
+                        .collect(Collectors.toList());
+
+                return new User(trainer.getEmail(), trainer.getPassword(), authorities);
+                }
+            }
+        }
         throw new UsernameNotFoundException("User with the following email address was not found.");
     }
 }
